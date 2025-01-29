@@ -1,0 +1,123 @@
+add wave x
+
+add wave y
+
+add wave add_sub
+
+add wave logic_func
+
+add wave out_add
+
+add wave out_func
+
+add wave func
+
+add wave output_out
+
+add wave overflow
+
+add wave zero
+
+
+
+force x 00000000000000000000000000001101
+force y 00000000000000000000000000001001
+force add_sub 0
+force func 00
+
+run 100
+
+force func 10
+
+run 100
+
+force func 01
+
+run 100
+
+
+
+force x 00000000000000000000000000001101
+force y 00000100000100000010001000100001
+force add_sub 0
+force func 10
+
+run 100
+
+
+
+force x 01011111101111011111110111111110
+force y 00000100000100000010001000100001
+force add_sub 1
+force func 10
+
+run 100
+
+
+
+force x 11011111101111011111110111111110
+force y 00000100000100000010001000100001
+force add_sub 1
+force func 10
+
+run 100
+
+
+
+force x 00000000000000000000000000001101
+force y 00000000000000000000000000001101
+force add_sub 1
+force func 10
+
+run 100
+
+
+
+force x 10000001000000000000000000001101
+force y 10000000000000010000000000001101
+force add_sub 0
+force func 10
+
+run 100
+
+
+
+force x 00000000000000000000000000001101
+force y 00000000000000000000000000001001
+force logic_func 00
+force func 11
+
+run 100
+
+
+
+force x 00000000000000000000000000001101
+force y 00000000000000000000000000001001
+force logic_func 01
+force func 11
+
+run 100
+
+
+force x 00000000000000000000000000001101
+force y 00000000000000000000000000001001
+force logic_func 10
+force func 11
+
+run 100
+
+
+
+force x 00000000000000000000000000001101
+force y 00000000000000000000000000001001
+force logic_func 11
+force func 11
+
+run 100
+
+
+
+
+
+
+

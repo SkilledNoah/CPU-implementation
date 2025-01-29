@@ -1,0 +1,162 @@
+library IEEE; 
+use IEEE.std_logic_1164.all;
+use IEEE.std_logic_signed.all;
+
+entity alu is
+port(x, y : in std_logic_vector(31 downto 0); -- two input
+	add_sub : in std_logic;
+	logic_func : in std_logic_vector(1 downto 0);
+	func : in std_logic_vector(1 downto 0);
+	output_out : out std_logic_vector(31 downto 0);
+	overflow : out std_logic;
+	zero : out std_logic);
+end alu ;
+
+architecture ALU_arch of alu is 
+
+
+signal out_add, out_func : std_logic_vector(31 downto 0);
+
+begin 
+
+--x(3 downto 0) <= x_in(3) & x_in(2) & x_in(1) & x_in(0);
+--y(3 downto 0) <= y_in(3) & y_in(2) & y_in(1) & y_in(0);
+--x(31 downto 4) <= (others => '0');
+--y(31 downto 4) <= (others => '0');
+
+--add-sub
+------------------------------------------------------------
+add_overflow_process:process(add_sub,x,y) --inputs
+
+begin 
+
+if (add_sub = '0') then --addition -> (x+y)
+out_add <= x+y;
+	--if (x(31) = y(31) AND out_add(31) /= y(31)) then -- overflow check (MSB)
+	--	overflow <= '1';
+	--else
+	--	overflow <= '0';
+	--end if;
+	
+
+elsif (add_sub = '1') then --substraction
+out_add <= x-y;
+	--if (x(31) /= y(31) AND out_add(31) /= x(31)) then -- overflow check
+	--	overflow <= '1';
+	--else
+	--	overflow <= '0';
+	--end if;
+
+end if;
+end process;
+
+--if (x(31) = y(31) & out_add(31) /= y(31)) then -- overflow check (MSB)
+--		overflow <= '1';
+--	else
+--		overflow <= '0';
+--	end if;
+
+--if (x(31) /= y(31) & out_add(31) /= x(31)) then -- overflow check
+--		overflow <= '1';
+--	else
+--		overflow <= '0';
+--	end if;
+
+-----------------------------------------------------logic_func
+logic_func_process:process(logic_func,x,y)
+
+begin
+
+if (logic_func = "00") then 
+out_func <= x AND y;
+
+elsif (logic_func = "01") then
+out_func <= x OR y;
+
+elsif (logic_func = "10") then 
+out_func <= x XOR y;
+
+elsif (logic_func = "11") then
+out_func <= x NOR y;
+
+end if;  
+
+---ERROR
+--out_func <= x AND y when (logic_func = "00") else
+--	    x OR y  when (logic_func = "01") else 
+--	    x XOR y when (logic_func = "10") else
+--	    x NOR y;
+
+-- can do select 
+
+end process;
+-------------------------------------------------------
+
+zero_process:process(out_add)
+
+begin 
+
+if (out_add = "00000000000000000000000000000000") then 
+zero <= '1';
+
+else 
+zero <= '0'; 
+
+end if;
+end process; 
+
+----------------------------------------------------
+overflow_process:process(add_sub,x,y,out_add)
+
+begin
+
+if (add_sub = '0') then --from k-map
+
+	overflow <= (not x(31) AND not y(31) and out_add(31)) or (x(31) AND y(31) and not out_add(31));
+
+
+else 
+
+	overflow <= (x(31) AND not y(31) and not out_add(31)) or (not x(31) AND y(31) AND out_add(31));
+
+
+end if;
+end process; 
+
+----------------------------------------------------
+
+multiplexer_process:process(out_add,y,out_func,func)
+
+begin 
+
+--case func is
+
+--	when "00" => 
+--		output_out <= y;
+
+--	when "01" =>
+--		output_out <= out_add(31) & "0000000000000000000000000000000";
+
+--	when "10" =>
+--		output_out <= out_add;
+
+--	when "11" =>
+--		output_out <= out_func;
+
+--end case;
+
+	if (func = "00")then 
+		output_out <= y;
+	elsif (func = "01")then
+		output_out <= out_add(31) & "0000000000000000000000000000000";
+	elsif (func = "10")then
+		output_out <= out_add;
+	else
+		output_out <= out_func;
+
+end if;
+
+
+end process;
+
+end ALU_arch;

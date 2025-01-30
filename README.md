@@ -1,4 +1,4 @@
-CPU Implementation
+# CPU Implementation
 Overview: This project involved the design and implementation of a 32-bit RISC CPU based on the MIPS architecture using VHDL. The project was divided into four key phases:
 
 ALU Design – Implemented a 32-bit Arithmetic Logic Unit capable of addition, subtraction, and logical operations.

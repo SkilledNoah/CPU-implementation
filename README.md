@@ -2,10 +2,14 @@
 ## Overview 
 This project involved the design and implementation of a 32-bit RISC CPU based on the MIPS architecture using VHDL. The project was divided into four key phases:
 
-### ALU Design – <span>Implemented a 32-bit Arithmetic Logic Unit capable of addition, subtraction, and logical operations.</span>
-### Register File Design – <span>Developed a multi-port register file with synchronous writes and asynchronous reads.</span>
-### Next-Address Unit – <span>Designed logic for handling program counter updates, including branch and jump instructions.</span>
-### Full CPU Implementation – <span>Integrated all components to form a functional CPU with instruction and data caches.</span>
+### ALU Design – 
+Implemented a 32-bit Arithmetic Logic Unit capable of addition, subtraction, and logical operations.
+### Register File Design – 
+Developed a multi-port register file with synchronous writes and asynchronous reads.
+### Next-Address Unit – 
+Designed logic for handling program counter updates, including branch and jump instructions.
+### Full CPU Implementation – 
+Integrated all components to form a functional CPU with instruction and data caches.
 
 ## Technologies & Tools
 VHDL for hardware description

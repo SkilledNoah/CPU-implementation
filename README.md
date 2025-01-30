@@ -20,9 +20,3 @@ Xilinx Vivado for synthesis and FPGA implementation
 Verified design functionality through waveform analysis and testbenches.
 Successfully synthesized the CPU on an FPGA.
 Gained hands-on experience with CPU design, digital logic, and hardware debugging.
-Project Files:
-
-/Lab1_ALU/ - ALU VHDL code, testbench, and waveform results.
-/Lab2_RegisterFile/ - Multi-port register file implementation.
-/Lab3_NextAddressUnit/ - Program counter logic.
-/Lab4_CPU/ - Full CPU integration and FPGA implementation.
